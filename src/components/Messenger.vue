@@ -51,7 +51,7 @@ export default defineComponent({
         .then((txt) => {
           return parseToN3(txt, inboxURI.value);
         });
-      ldn_list.value = inbox.store
+      return inbox.store
         .getObjects(inboxURI.value, LDP("contains"), null)
         .map((obj) => obj.value);
     };
@@ -61,13 +61,13 @@ export default defineComponent({
       var socket = new WebSocket(`wss://${hostname}`, ["solid-0.1"]);
       socket.onopen = function () {
         this.send(`sub ${inboxURI.value}`);
-        get(inboxURI.value);
+        get(inboxURI.value).then(list => ldn_list.value = list);
       };
       socket.onmessage = function (msg) {
         if (msg.data && msg.data.slice(0, 3) === "pub") {
           // resource updated, refetch resource
           console.log(msg);
-          get(inboxURI.value);
+          get(inboxURI.value).then(list => ldn_list.value = list);
           toast.add({
             severity: "success",
             summary: "Good news, everyone!",
