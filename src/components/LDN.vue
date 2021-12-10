@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      {{ uri }}
+      {{ pathname }}
     </template>
     <template #content>
       {{ ldn }}
@@ -20,6 +20,7 @@ export default defineComponent({
     uri: { default: "" },
   },
   async setup(props) {
+     const { pathname } = new URL(props.uri);
     const { authFetch } = useSolidSession();
     const ldn = await getResource(props.uri, authFetch.value).then((resp) =>
       resp.text()
@@ -28,7 +29,7 @@ export default defineComponent({
     //     return parseToN3(txt, props.uri);
     //   });
     
-    return { ldn };
+    return { ldn, pathname };
   },
 });
 </script>
