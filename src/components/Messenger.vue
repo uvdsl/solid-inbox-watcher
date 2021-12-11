@@ -18,9 +18,11 @@
         <template #default>
           <LDN :uri="ldn" />
         </template>
+        <!--
         <template #fallback>
           <div>Loading...</div>
         </template>
+        -->
       </Suspense>
     </div>
   </div>
