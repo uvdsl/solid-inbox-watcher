@@ -9,20 +9,12 @@
       />
       <Button @click="sub"> watch </Button>
     </div>
-    <div
-      v-for="ldn in ldn_list"
-      :key="ldn"
-      class="p-inputgroup p-col-6 p-row p-offset-3"
-    >
-      <Suspense>
-        <template #default>
-          <LDN :uri="ldn" />
-        </template>
-        <template #fallback>
-          <div>Loading...</div>
-        </template>
-      </Suspense>
-    </div>
+      <LDN
+        :uri="ldn"
+        v-for="ldn in ldn_list"
+        :key="ldn"
+        class="p-inputgroup p-col-12 p-row p-offset-3"
+      />
   </div>
   <Toast position="bottom-right" />
 </template>
@@ -61,17 +53,17 @@ export default defineComponent({
       var socket = new WebSocket(`wss://${hostname}`, ["solid-0.1"]);
       socket.onopen = function () {
         this.send(`sub ${inboxURI.value}`);
-        get(inboxURI.value).then(list => ldn_list.value = list);
+        get(inboxURI.value).then((list) => (ldn_list.value = list));
       };
       socket.onmessage = function (msg) {
         if (msg.data && msg.data.slice(0, 3) === "pub") {
           // resource updated, refetch resource
           console.log(msg);
-          get(inboxURI.value).then(list => ldn_list.value = list);
+          get(inboxURI.value).then((list) => (ldn_list.value = list));
           toast.add({
             severity: "success",
             summary: "Good news, everyone!",
-            detail: "A new message arrived.",
+            detail: "The inbox was updated.",
             life: 5000,
           });
         }
