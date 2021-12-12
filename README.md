@@ -2,6 +2,7 @@
 
 Watch your LDNs as they arrive!
 
+![screenshot](https://github.com/uvdsl/solid-inbox-watcher/blob/main/img/preview.png?raw=true)
 
 ## Build and run using Docker
 ```
