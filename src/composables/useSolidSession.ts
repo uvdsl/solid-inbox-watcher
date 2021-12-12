@@ -24,10 +24,10 @@ session.handleIncomingRedirect({ url: window.location.href, restorePreviousSessi
 /**
  * Login :)
  */
-async function login() {
+async function login(idp: string) {
   if (!session.info.isLoggedIn) {
     await session.login({
-      oidcIssuer: "https://inrupt.net", // TODO take as arg
+      oidcIssuer: idp , // eg "https://inrupt.net"
       redirectUrl: window.location.href,
       popUp: false // Popup login is not implemented yet
     });
