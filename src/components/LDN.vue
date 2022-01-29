@@ -1,7 +1,7 @@
 <template>
   <Card class="margined">
     <template #content>
-      <div> <i>{{ uri }} </i> </div>
+      <div> <i class="text-primary">{{ uri }} </i> </div>
       <Divider />
       <span v-if="!error" style="white-space: pre-line">
         {{ ldn }}
@@ -14,6 +14,7 @@
       <Button
         icon="pi pi-times"
         label="Delete"
+        class="p-button-text p-button-rounded p-button-raised"
         @click="deleteResource(uri, authFetch)"
       />
     </template>
