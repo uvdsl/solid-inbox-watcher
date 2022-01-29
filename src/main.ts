@@ -15,6 +15,8 @@ import Dialog from 'primevue/dialog';
 import SpeedDial from 'primevue/speeddial';
 import Toast from 'primevue/toast';
 
+import Divider from 'primevue/divider';
+
 import Tooltip from 'primevue/tooltip';
 import ToastService from 'primevue/toastservice';
 
@@ -39,6 +41,7 @@ app.component("Textarea", Textarea)
 app.component("Dialog", Dialog)
 app.component("SpeedDial", SpeedDial)
 app.component("Toast", Toast)
+app.component("Divider", Divider)
 
 app.directive('tooltip', Tooltip);
 

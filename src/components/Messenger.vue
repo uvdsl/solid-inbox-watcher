@@ -1,6 +1,7 @@
 <template>
-  <div class="p-grid">
-    <div class="p-inputgroup p-col-6 p-row p-offset-3">
+   <div class="grid">
+    <div class="col lg:col-6 lg:col-offset-3">
+      <div class="p-inputgroup">
       <!-- list go here -->
       <InputText
         placeholder="The URI of the Inbox to watch."
@@ -8,13 +9,18 @@
         @keyup.enter="sub"
       />
       <Button @click="sub"> watch </Button>
+      </div>
     </div>
-      <LDN
-        :uri="ldn"
-        v-for="ldn in ldn_list"
-        :key="ldn"
-        class="p-inputgroup p-col-12 p-row p-offset-3"
-      />
+   </div>
+   <div class="grid">
+    <div class="col lg:col-6 lg:col-offset-3">
+    <LDN
+      :uri="ldn"
+      :updateFlag="updateFlag"
+      v-for="ldn in ldn_list"
+      :key="ldn"
+    />
+    </div>
   </div>
   <Toast position="bottom-right" />
 </template>
@@ -36,6 +42,7 @@ export default defineComponent({
     const { authFetch } = useSolidSession();
     const ldn_list = ref(new Array<String>());
     const inboxURI = ref("");
+    const updateFlag = ref(false);
 
     const get = async (uri: string) => {
       const inbox = await getResource(uri, authFetch.value)
@@ -59,7 +66,10 @@ export default defineComponent({
         if (msg.data && msg.data.slice(0, 3) === "pub") {
           // resource updated, refetch resource
           console.log(msg);
-          get(inboxURI.value).then((list) => (ldn_list.value = list));
+          get(inboxURI.value).then((list) => {
+            ldn_list.value = list;
+            updateFlag.value = !updateFlag.value;
+          });
           toast.add({
             severity: "success",
             summary: "Good news, everyone!",
@@ -74,6 +84,7 @@ export default defineComponent({
       sub,
       inboxURI,
       ldn_list,
+      updateFlag
     };
   },
 });
@@ -81,19 +92,9 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.p-grid {
+.grid {
   margin: 5px;
 }
-.p-inputgroup {
-  width: 50%;
-}
-// TextArea {
-// height: 100%;
-// width: 100%;
-// max-height: 100%;
-// max-width: 100%;
-//   margin-bottom: 10px;
-// }
 ::v-deep() {
   .p-speeddial {
     bottom: 0;

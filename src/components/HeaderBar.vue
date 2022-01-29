@@ -1,12 +1,12 @@
 <template>
   <Toolbar>
-    <template #left>
+    <template #start>
       <Avatar v-if="img" :image="img" shape="circle" />
       <a :href="webId">
         <span>{{ name }}</span>
       </a>
     </template>
-    <template #right>
+    <template #end>
       <LoginButton v-if="!isLoggedIn" />
       <LogoutButton v-if="isLoggedIn" />
     </template>
