@@ -25,10 +25,10 @@
       </transition-group>
     </div>
   </div>
-  <Toast
+  <!-- <Toast
     position="bottom-right"
     :breakpoints="{ '420px': { width: '100%', right: '0', left: '0' } }"
-  />
+  /> -->
 </template>
 
 <script lang="ts">
@@ -37,14 +37,14 @@ import { defineComponent, ref } from "vue";
 import { useSolidSession } from "@/composables/useSolidSession";
 import { getResource, parseToN3 } from "@/lib/solidRequests";
 
-import { useToast } from "primevue/usetoast";
+// import { useToast } from "primevue/usetoast";
 import LDN from "@/components/LDN.vue";
 
 export default defineComponent({
   name: "Messenger",
   components: { LDN },
   async setup() {
-    const toast = useToast();
+    // const toast = useToast();
     const { authFetch } = useSolidSession();
     const ldn_list = ref([] as String[]);
     const inboxURI = ref("");
@@ -83,12 +83,12 @@ export default defineComponent({
             ldn_list.value = list;
             updateFlag.value = !updateFlag.value;
           });
-          toast.add({
-            severity: "success",
-            summary: "Good news, everyone!",
-            detail: "The inbox was updated.",
-            life: 5000,
-          });
+          // toast.add({
+          //   severity: "success",
+          //   summary: "Good news, everyone!",
+          //   detail: "The inbox was updated.",
+          //   life: 5000,
+          // });
         }
       };
     };
