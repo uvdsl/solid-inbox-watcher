@@ -78,7 +78,8 @@ export default defineComponent({
           console.log(msg);
           get(inboxURI.value).then((list) => {
             for (const e of ldn_list.value) {
-              list.push(list.splice(list.indexOf(e.toString()), 1)[0]);
+              const i = list.indexOf(e.toString());
+              if (i > -1) list.push(list.splice(i, 1)[0]);
             }
             ldn_list.value = list;
             updateFlag.value = !updateFlag.value;
