@@ -71,6 +71,9 @@ export default defineComponent({
           // resource updated, refetch resource
           console.log(msg);
           get(inboxURI.value).then((list) => {
+            for (const e of ldn_list.value) {
+              list.push(list.splice(list.indexOf(e.toString()), 1)[0]);
+            }
             ldn_list.value = list;
             updateFlag.value = !updateFlag.value;
           });
