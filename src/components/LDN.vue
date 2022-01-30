@@ -61,7 +61,7 @@ export default defineComponent({
                   props.uri
                 );
                 if (ldn.value !== newContent) {
-                  // if (ldn.value !== "Message loading.") // flash only on update
+                  if (ldn.value !== "Message loading.") // flash only on update
                   flash();
                   ldn.value = newContent;
                 }
