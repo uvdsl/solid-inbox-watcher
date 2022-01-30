@@ -1,25 +1,25 @@
 <template>
-   <div class="grid">
+  <div class="grid">
     <div class="col lg:col-6 lg:col-offset-3">
       <div class="p-inputgroup">
-      <!-- list go here -->
-      <InputText
-        placeholder="The URI of the Inbox to watch."
-        v-model="inboxURI"
-        @keyup.enter="sub"
-      />
-      <Button @click="sub"> watch </Button>
+        <!-- list go here -->
+        <InputText
+          placeholder="The URI of the Inbox to watch."
+          v-model="inboxURI"
+          @keyup.enter="sub"
+        />
+        <Button @click="sub"> watch </Button>
       </div>
     </div>
-   </div>
-   <div class="grid">
+  </div>
+  <div class="grid">
     <div class="col lg:col-6 lg:col-offset-3">
-    <LDN
-      :uri="ldn"
-      :updateFlag="updateFlag"
-      v-for="ldn in ldn_list"
-      :key="ldn"
-    />
+      <LDN
+        :uri="ldn"
+        :updateFlag="updateFlag"
+        v-for="ldn in ldn_list"
+        :key="ldn"
+      />
     </div>
   </div>
   <Toast position="bottom-right" />
@@ -42,6 +42,7 @@ export default defineComponent({
     const { authFetch } = useSolidSession();
     const ldn_list = ref(new Array<String>());
     const inboxURI = ref("");
+    let socket: WebSocket;
     const updateFlag = ref(false);
 
     const get = async (uri: string) => {
@@ -56,10 +57,11 @@ export default defineComponent({
     };
 
     const sub = async () => {
+      if (socket !== undefined) socket.close();
       const uri = new URL(inboxURI.value);
-      uri.protocol = "wss"
+      uri.protocol = "wss";
 
-      var socket = new WebSocket(uri.href, ["solid-0.1"]);
+      socket = new WebSocket(uri.href, ["solid-0.1"]);
       socket.onopen = function () {
         this.send(`sub ${inboxURI.value}`);
         get(inboxURI.value).then((list) => (ldn_list.value = list));
@@ -86,7 +88,7 @@ export default defineComponent({
       sub,
       inboxURI,
       ldn_list,
-      updateFlag
+      updateFlag,
     };
   },
 });
