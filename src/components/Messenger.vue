@@ -120,7 +120,7 @@ export default defineComponent({
 }
 .list-leave-to {
   opacity: 0;
-  transform: translateY(80%);
+  transform: translateX(80%);
 }
 .list-leave-active {
   position: absolute;
