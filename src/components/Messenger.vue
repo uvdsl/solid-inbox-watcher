@@ -22,7 +22,10 @@
       />
     </div>
   </div>
-  <Toast position="bottom-right" />
+  <Toast
+    position="bottom-right"
+    :breakpoints="{ '420px': { width: '100%', right: '0', left: '0' } }"
+  />
 </template>
 
 <script lang="ts">
