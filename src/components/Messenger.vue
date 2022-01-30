@@ -56,8 +56,10 @@ export default defineComponent({
     };
 
     const sub = async () => {
-      const { hostname } = new URL(inboxURI.value);
-      var socket = new WebSocket(`wss://${hostname}`, ["solid-0.1"]);
+      const uri = new URL(inboxURI.value);
+      uri.protocol = "wss"
+
+      var socket = new WebSocket(uri.href, ["solid-0.1"]);
       socket.onopen = function () {
         this.send(`sub ${inboxURI.value}`);
         get(inboxURI.value).then((list) => (ldn_list.value = list));
