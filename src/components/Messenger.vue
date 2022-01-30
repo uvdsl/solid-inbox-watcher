@@ -14,12 +14,15 @@
   </div>
   <div class="grid">
     <div class="col lg:col-6 lg:col-offset-3">
-      <LDN
-        :uri="ldn"
-        :updateFlag="updateFlag"
-        v-for="ldn in ldn_list"
-        :key="ldn"
-      />
+      <transition-group name="list" tag="md-list">
+        <LDN
+          :uri="ldn"
+          :updateFlag="updateFlag"
+          v-for="ldn in ldn_list"
+          :key="ldn"
+          class="list-item"
+        />
+      </transition-group>
     </div>
   </div>
   <Toast
@@ -43,7 +46,7 @@ export default defineComponent({
   async setup() {
     const toast = useToast();
     const { authFetch } = useSolidSession();
-    const ldn_list = ref(new Array<String>());
+    const ldn_list = ref([] as String[]);
     const inboxURI = ref("");
     let socket: WebSocket;
     const updateFlag = ref(false);
@@ -105,24 +108,24 @@ export default defineComponent({
 .grid {
   margin: 5px;
 }
-::v-deep() {
-  .p-speeddial {
-    bottom: 0;
-    right: calc(50% - 2rem);
-    padding-bottom: 15px;
-  }
-  .sizing {
-    height: calc(100vh - 240px);
-    width: 100%;
-    max-height: calc(100vh - 240px);
-    max-width: 100%;
-  }
+
+.list-item {
+  transition: all 1s;
+  display: inline-block;
+  width: 100%;
 }
-.border {
-  border: 1px solid var(--surface-d);
-  border-radius: 3px;
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
 }
-.border:hover {
-  border: 1px solid var(--primary-color);
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(80%);
+}
+.list-leave-active {
+  position: absolute;
+}
+.list-move {
+  transition: all 1s;
 }
 </style>

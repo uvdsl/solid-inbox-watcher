@@ -1,6 +1,5 @@
 <template>
-  <div v-bind:class="{ margined: true, highlight: isHighlighted }">
-    <Card>
+    <Card v-bind:class="{ margined: true, highlight: isHighlighted }">
       <template #content>
         <div>
           <i class="text-primary">{{ uri }} </i>
@@ -22,7 +21,6 @@
         />
       </template>
     </Card>
-  </div>
 </template>
 
 <script lang="ts">
