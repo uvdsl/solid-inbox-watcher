@@ -9,12 +9,14 @@
         <span v-else style="color: red">
           {{ error }}
         </span>
+        <!--
         <Button
           icon="pi pi-times"
           label="Delete"
           class="p-button-text p-button-rounded p-button-danger p-button-raised"
           @click="deleteResource(uri, authFetch)"
         />
+        -->
       </template>
 <!--      <template #footer>
 
