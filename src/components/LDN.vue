@@ -2,12 +2,10 @@
     <Card v-bind:class="{ margined: true, highlight: isHighlighted }">
       <template #content>
         <div>
-          <i >At {{ uri }} :</i>
+          <i >Representation of {{ uri }} :</i>
         </div>
         <Divider />
-        <pre v-if="!error" class="text-primary" style="white-space: pre-line">
-          {{ ldn }}
-        </pre>
+        <pre v-if="!error" class="text-primary" >{{ ldn }}</pre>
         <span v-else style="color: red">
           {{ error }}
         </span>
@@ -112,7 +110,7 @@ export default defineComponent({
   /* add 'border-color: transparent' if you wish no border to show initially */
 }
 .highlight {
-  -webkit-animation: borderBlink 1s step-end 3;
-  animation: borderBlink 1s step-end 3;
+  -webkit-animation: borderBlink 0.3s step-end 3;
+  animation: borderBlink 0.3s step-end 3;
 }
 </style>
