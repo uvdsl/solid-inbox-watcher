@@ -212,7 +212,7 @@ export const toTTL = (
 
   // n3Writer.addQuads(n3Store.getQuads(null, null, null, null))
   n3Writer.end((error, text) => (result = text));
-  return `# Parsed from underlying RDF graph.\n ${result}`;
+  return `${result}`;
 };
 
 /*

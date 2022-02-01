@@ -2,24 +2,25 @@
     <Card v-bind:class="{ margined: true, highlight: isHighlighted }">
       <template #content>
         <div>
-          <i class="text-primary">{{ uri }} </i>
+          <i >At {{ uri }} :</i>
         </div>
         <Divider />
-        <span v-if="!error" style="white-space: pre-line">
+        <pre v-if="!error" class="text-primary" style="white-space: pre-line">
           {{ ldn }}
-        </span>
+        </pre>
         <span v-else style="color: red">
           {{ error }}
         </span>
-      </template>
-      <template #footer>
         <Button
           icon="pi pi-times"
           label="Delete"
-          class="p-button-text p-button-rounded p-button-raised"
+          class="p-button-text p-button-rounded p-button-danger p-button-raised"
           @click="deleteResource(uri, authFetch)"
         />
       </template>
+<!--      <template #footer>
+
+      </template> -->
     </Card>
 </template>
 
