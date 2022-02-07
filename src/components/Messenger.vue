@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="grid" v-if="!versteckt">
     <div class="col lg:col-6 lg:col-offset-3">
       <div class="p-inputgroup">
         <!-- list go here -->
@@ -9,6 +9,7 @@
           @keyup.enter="sub"
         />
         <Button @click="sub"> watch </Button>
+        <Button v-on:click="versteckt = true" > hide </Button>
       </div>
     </div>
   </div>
@@ -43,6 +44,11 @@ import LDN from "@/components/LDN.vue";
 export default defineComponent({
   name: "Messenger",
   components: { LDN },
+  data: function() {
+      return {
+        versteckt: false
+    }
+  },
   async setup() {
     // const toast = useToast();
     const { authFetch } = useSolidSession();

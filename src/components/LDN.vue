@@ -2,24 +2,25 @@
     <Card v-bind:class="{ margined: true, highlight: isHighlighted }">
       <template #content>
         <div>
-          <i class="text-primary">{{ uri }} </i>
+          <i >Representation of {{ uri }} :</i>
         </div>
         <Divider />
-        <span v-if="!error" style="white-space: pre-line">
-          {{ ldn }}
-        </span>
+        <pre v-if="!error" class="text-primary" >{{ ldn }}</pre>
         <span v-else style="color: red">
           {{ error }}
         </span>
-      </template>
-      <template #footer>
+        <!--
         <Button
           icon="pi pi-times"
           label="Delete"
-          class="p-button-text p-button-rounded p-button-raised"
+          class="p-button-text p-button-rounded p-button-danger p-button-raised"
           @click="deleteResource(uri, authFetch)"
         />
+        -->
       </template>
+<!--      <template #footer>
+
+      </template> -->
     </Card>
 </template>
 
@@ -111,7 +112,7 @@ export default defineComponent({
   /* add 'border-color: transparent' if you wish no border to show initially */
 }
 .highlight {
-  -webkit-animation: borderBlink 1s step-end 3;
-  animation: borderBlink 1s step-end 3;
+  -webkit-animation: borderBlink 0.3s step-end 3;
+  animation: borderBlink 0.3s step-end 3;
 }
 </style>
