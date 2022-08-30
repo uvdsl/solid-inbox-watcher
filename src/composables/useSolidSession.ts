@@ -29,7 +29,7 @@ async function login(idp: string) {
     await session.login({
       oidcIssuer: idp , // eg "https://inrupt.net"
       redirectUrl: window.location.href,
-      popUp: false // Popup login is not implemented yet
+      // popUp: false // Popup login is not implemented yet
     });
   }
 }
